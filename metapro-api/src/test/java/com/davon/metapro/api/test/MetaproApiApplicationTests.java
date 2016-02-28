@@ -1,4 +1,4 @@
-package com.davon;
+package com.davon.metapro.api.test;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -22,6 +22,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.davon.dvnfrm.util.SessionIdentifierGenerator;
+import com.davon.metapro.api.MetaproApiApplication;
 import com.davon.metapro.api.domain.MessageDTO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
