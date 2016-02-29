@@ -23,7 +23,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.davon.dvnfrm.util.SessionIdentifierGenerator;
 import com.davon.metapro.api.MetaproApiApplication;
-import com.davon.metapro.api.domain.MessageDTO;
+import com.davon.metapro.api.dto.MessageDTO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = MetaproApiApplication.class)
@@ -66,6 +66,7 @@ public class MetaproApiApplicationTests {
 		// .andExpect(status().isOk()));
 
 		LOGGER.debug(result2.andReturn().getResponse().getContentAsString());
+		result2.andExpect(content().string(containsString(messageContent)));
 
 		ResultActions result3 = this.mvc.perform(get("/message/getAll"))
 				.andExpect(status().isOk())
@@ -79,6 +80,8 @@ public class MetaproApiApplicationTests {
 		ResultActions result4 = mvc.perform(post("/message/add")
 				.contentType(TestUtil.APPLICATION_JSON_UTF8)
 				.content(TestUtil.convertObjectToJsonBytes(testMessage)));
+		result4.andExpect(status().isBadRequest());
+		LOGGER.debug(result4.andReturn().getResponse().getContentAsString());
 
 	}
 

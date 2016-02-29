@@ -9,7 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.davon.metapro.api.dao.MessageDao;
 import com.davon.metapro.api.domain.Message;
-import com.davon.metapro.api.domain.MessageDTO;
+import com.davon.metapro.api.dto.MessageDTO;
 
 @Controller
 public class MetaproApiController {
@@ -45,33 +45,34 @@ public class MetaproApiController {
 	}
 
 	@RequestMapping(value = "/message/add", method = RequestMethod.GET)
-	public String showAddTodoForm(Model model) {
+	@ResponseBody
+	public String showAddTodoForm(@Valid @RequestBody MessageDTO message) {
 		MessageDTO formObject = new MessageDTO();
-		model.addAttribute("todo", formObject);
+		// model.addAttribute("todo", formObject);
 
 		return "/message/add";
 	}
 
-//	 @RequestMapping(value = "/message/add", method = RequestMethod.POST)
-//	 public String add(@Valid @ModelAttribute("todo") MessageDTO dto,
-//	 BindingResult result, RedirectAttributes attributes) {
-//	 if (result.hasErrors()) {
-//	 return "todo/add";
-//	 }
-//	
-//	 Message toBeAdded = new Message();
-//	 BeanUtils.copyProperties(dto, toBeAdded);
-//	 toBeAdded.setId(null);
-//	
-//	 Message added = dao.saveAndFlush(toBeAdded);
-//	
-//	 attributes.addFlashAttribute("feedbackMessage", added.getMessage());
-//	// addFeedbackMessage(attributes, "feedback.message.todo.added",
-//	// added.getMessage());
-//	 attributes.addAttribute("id", added.getId());
-//	
-//	 return createRedirectViewPath("/message/{id}");
-//	 }
+	// @RequestMapping(value = "/message/add", method = RequestMethod.POST)
+	// public String add(@Valid @ModelAttribute("todo") MessageDTO dto,
+	// BindingResult result, RedirectAttributes attributes) {
+	// if (result.hasErrors()) {
+	// return "todo/add";
+	// }
+	//
+	// Message toBeAdded = new Message();
+	// BeanUtils.copyProperties(dto, toBeAdded);
+	// toBeAdded.setId(null);
+	//
+	// Message added = dao.saveAndFlush(toBeAdded);
+	//
+	// attributes.addFlashAttribute("feedbackMessage", added.getMessage());
+	// // addFeedbackMessage(attributes, "feedback.message.todo.added",
+	// // added.getMessage());
+	// attributes.addAttribute("id", added.getId());
+	//
+	// return createRedirectViewPath("/message/{id}");
+	// }
 
 	private String createRedirectViewPath(String requestMapping) {
 		StringBuilder redirectViewPath = new StringBuilder();

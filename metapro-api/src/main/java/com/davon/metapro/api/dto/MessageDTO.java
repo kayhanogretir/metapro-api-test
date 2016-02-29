@@ -1,4 +1,4 @@
-package com.davon.metapro.api.domain;
+package com.davon.metapro.api.dto;
 
 import java.util.Date;
 

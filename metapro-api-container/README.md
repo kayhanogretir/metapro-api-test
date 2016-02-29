@@ -1,5 +1,5 @@
 cd db-postgresql
-docker build -t metpro-api-db .
+docker build -t metapro-api-db .
 docker run -d -p 5432:5432 --name metapro-db metapro-api-db
 cd ..
 cd metapro-api-server
