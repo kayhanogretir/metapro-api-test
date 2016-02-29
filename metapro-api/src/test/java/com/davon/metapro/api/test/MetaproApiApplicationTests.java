@@ -80,7 +80,9 @@ public class MetaproApiApplicationTests {
 		ResultActions result4 = mvc.perform(post("/message/add")
 				.contentType(TestUtil.APPLICATION_JSON_UTF8)
 				.content(TestUtil.convertObjectToJsonBytes(testMessage)));
-		result4.andExpect(status().isBadRequest());
+		result4.andExpect(status().isBadRequest()).andExpect(
+				content().string(containsString("may not be empty")));
+
 		LOGGER.debug(result4.andReturn().getResponse().getContentAsString());
 
 	}
